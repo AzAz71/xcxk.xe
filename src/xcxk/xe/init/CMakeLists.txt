@@ -8,6 +8,7 @@ configure_file(
 
 add_executable(xcxk.xe.init
         main.cpp
+        init.cpp
 )
 
 target_link_libraries(xcxk.xe.init PRIVATE

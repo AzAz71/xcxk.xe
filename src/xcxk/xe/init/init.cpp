@@ -1,9 +1,13 @@
 #include <string>
+#include <dlfcn.h>
+#include <link.h>
 
 #include <CLI11.hpp>
 
 #include <spdlog/spdlog-inl.h>
 #include <spdlog/sinks/stdout_color_sinks-inl.h>
+
+#include <xcxk/xe/core/model/model.h>
 
 #include "version.h"
 
@@ -44,4 +48,13 @@ void s_init(int argc, char *argv[]) {
     } catch (std::runtime_error &m) {
         logger->error(m.what());
     }
+}
+
+void m_load() {
+    auto *lm = (link_map *)dlopen(core_filepath.c_str(), RTLD_NOW);
+
+}
+
+void m_init() {
+
 }

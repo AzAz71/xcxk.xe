@@ -6,3 +6,11 @@ configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/version.h
 )
 
+add_library(xcxk.xe.core SHARED
+        model/model.cpp
+        core.cpp
+)
+
+target_link_libraries(xcxk.xe.core PRIVATE
+        spdlog
+)

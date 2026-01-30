@@ -7,5 +7,5 @@ project(xcxk.xe VERSION ${VERSION})
 include_directories(src)
 
 add_subdirectory(src/spdlog)
-add_subdirectory(src/xcxk/xe/init)
 add_subdirectory(src/xcxk/xe/core)
+add_subdirectory(src/xcxk/xe/init)

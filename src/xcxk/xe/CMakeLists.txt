@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 3.16.0)
-project(xcxk.xe.core VERSION ${VERSION})
+project(xcxk.xe VERSION ${VERSION})
 
 configure_file(
         ${CMAKE_SOURCE_DIR}/src/xcxk/xe/version.h.in
         ${CMAKE_CURRENT_SOURCE_DIR}/version.h
 )
 
-add_library(xcxk.xe.core SHARED
-        model/model.cpp
+add_executable(xcxk.xe.init
+        main.cpp
+        init.cpp
         core.cpp
 )
 
-target_link_libraries(xcxk.xe.core PRIVATE
+target_link_libraries(xcxk.xe.init PRIVATE
         spdlog
 )
+

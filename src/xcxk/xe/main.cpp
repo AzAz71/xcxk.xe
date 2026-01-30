@@ -3,7 +3,7 @@
 
 #include <spdlog/logger.h>
 
-#include "version.h"
+#include "init/version.h"
 #include "msg/messages.h"
 #include "init.h"
 

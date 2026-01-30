@@ -9,9 +9,9 @@
 
 #include <xcxk/xe/core/model/model.h>
 
-#include "version.h"
+#include "init/version.h"
 
-#include "init.h"
+#include "init/init.h"
 
 std::shared_ptr<spdlog::logger> logger;
 std::string core_filepath = "./libxcxk.xe.core.so";

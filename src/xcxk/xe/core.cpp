@@ -1,5 +1,5 @@
-#include "core.h"
-#include "version.h"
+#include "core/core.h"
+#include "core/version.h"
 
 namespace xcxk::xe::core {
     core::core() {

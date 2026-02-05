@@ -7,11 +7,13 @@
 #include <spdlog/spdlog-inl.h>
 #include <spdlog/sinks/stdout_color_sinks-inl.h>
 
-#include <xcxk/xe/core/model/model.h>
+#include "model/model.h"
 
-#include "init/version.h"
+#include "version.h"
 
-#include "init/init.h"
+#include "init.h"
+
+#include "core/core.h"
 
 std::shared_ptr<spdlog::logger> logger;
 std::string core_filepath = "./libxcxk.xe.core.so";
@@ -34,6 +36,9 @@ void s_args_prase(int argc, char *argv[]) {
     log_level_group->add_flag_callback("--log-critical", [](){spdlog::set_level(spdlog::level::critical);});
     log_level_group->add_flag_callback("--log-off", [](){spdlog::set_level(spdlog::level::off);});
 
+    std::vector<std::string> d;
+    log_level_group->add_option("--log-config", d);
+
     CLI11_PARSE(Main, argc, argv);
 
 }
@@ -50,11 +55,20 @@ void s_init(int argc, char *argv[]) {
     }
 }
 
-void m_load() {
-    auto *lm = (link_map *)dlopen(core_filepath.c_str(), RTLD_NOW);
+void core_run() {
+    try {
+        xcxk::xe::model *Core = new xcxk::xe::core();
 
-}
+        const std::map<std::string, void *> args;
 
-void m_init() {
+        logger->info("Loading {}. ", Core->getID());
+        logger->trace("Call onLoad(void)");     Core->onLoad();
+        logger->trace("Call onEnable(void)");   Core->onEnable();
 
+        logger->debug("Stopping server");
+        logger->trace("Call onDisable(void)");  Core->onDisable();
+        logger->trace("Call onUnload(void)");   Core->onUnload();
+    } catch (std::runtime_error &m) {
+        logger->error(m.what());
+    }
 }

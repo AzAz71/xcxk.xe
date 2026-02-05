@@ -1,9 +1,10 @@
 #ifndef XCXK_XE_MODEL_H
 #define XCXK_XE_MODEL_H
 
+#include <map>
 #include <spdlog/spdlog.h>
 
-namespace xcxk::xe::core {
+namespace xcxk::xe {
     class model {
     protected:
         std::string ID;
@@ -26,6 +27,7 @@ namespace xcxk::xe::core {
         virtual std::shared_ptr<spdlog::logger> &getLogger();
 
         virtual void onLoad();
+        virtual void onLoad(const std::map<std::string, void *> &args);
         virtual void onEnable();
         virtual void onDisable();
         virtual void onUnload();
